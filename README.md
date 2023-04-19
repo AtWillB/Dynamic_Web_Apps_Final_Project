@@ -5,4 +5,6 @@ This Project is titled NASA EXOPLANET ARCHIVE STATISTICS. Its goal is to display
 
 The second part of the website will display 3 numerical staticis, which as of the writing of this Readme have not been explicity identified. 
 
-The displayed data for this project do not go through any NASA API. Rather, they go through a website created by myself and Ethan Heugler, a computer science student at the University of Maryland. We collaborated on a project that I wrote the back-end for. In order to get data to Ethan, I created API endpoints using Python's Flask which generated appropriate JSON objects from a SQL database I set up. An example endpoint is avalibale at https://exo-dash-planets.vercel.app/api/vis/discovery_methods_bar
+The displayed data for this project do not go through any NASA API. Rather, they go through a website created by myself and Ethan Heugler, a computer science student at the University of Maryland. We collaborated on a project that I wrote the back-end for. In order to get data to Ethan, I created API endpoints using Python's Flask which generated appropriate JSON objects from a SQL database I set up. An example endpoint is avalibale [here](https://exo-dash-planets.vercel.app/api/vis/discovery_methods_bar).
+
+A sql dump and accompanying UML diagram will be added to the repository at somepoint. 
