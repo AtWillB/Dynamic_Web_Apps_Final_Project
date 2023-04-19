@@ -121,24 +121,29 @@
     padding: 1.5rem;
     margin: 0 auto;
   }
-  
-  .left_section {
+
+  .top_section {
     /* background-color: rgba(0, 139, 139, 0.8); */
-    flex: 0 1 auto;
+    flex: 1 1 auto;
     margin: 1rem;
     padding: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    height: 200px;;
   }
-
-  /*Middle section?*/
   
-  .right_section {
-    /* background-color: rgba(255, 224, 138, 0.7); */
-    flex: 1 2 auto;
+  .bottom_section {
+    /* background-color: rgba(0, 139, 139, 0.8); */
+    flex: 1 1 auto;
     margin: 1rem;
+    padding: 1.5rem;
     align-items: center;
     display: flex;
     flex-direction: column;
   }
+
   
   /*
     This block is actually dependent on the "container" block having a flex set on it
@@ -157,7 +162,7 @@
   }
   
   .footer a {
-    color: rgba(231, 9, 183, 0);
+    color: #0000EE;
     text-decoration: underline;
   }
   
@@ -168,7 +173,7 @@
   */
   .footer a:hover {
     /* Hue, saturation, luminosity, alpha */
-    background-color: hsla(0, 0%, 90%, 0);
+    background-color: hsla(0, 0%, 90%, 0.661);
     /* red, green, blue, alpha */
     color: rgb(246, 169, 93);
     text-decoration: none;
@@ -188,33 +193,3 @@
   
 
   /* How To Write A Media Query For Small Screens */
-  
-  @media only screen and (max-width: 736px){
-      /* Rules in here will only apply when a screen is the correct size */
-      /* check it out by using your developer tools to shrink your screen-size */
-      .container {
-        background-color: rgba(204, 8, 162, 0.65);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-      .right_section {
-        /* background-color: rgba(255, 224, 138, 0.7); */
-        flex: 1 2 auto;
-        margin: 1rem;
-        align-items: start;
-        display: flex;
-        flex-direction: column;
-      }
-  
-      .left_section {
-      /* background-color: rgba(0, 139, 139, 0.8); */
-      flex: 0 1 auto;
-      margin: 1rem;
-      padding: 1.5rem;
-      align-items: start;
-      display: flex;
-      flex-direction: column;
-      }
-  
-  }
