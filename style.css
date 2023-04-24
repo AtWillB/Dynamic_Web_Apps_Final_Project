@@ -184,6 +184,11 @@
     margin: 0px;
     margin-bottom: 5px;
   }
+
+  .chart {
+    margin: 0px auto;
+    width: 60vw;
+  }
   
   
   

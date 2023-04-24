@@ -34,9 +34,34 @@ async function mainEvent() {
     console.log(y_values);
     console.log(x_values);
 
-    
-    
-    
+
+
+    new Chart("discoveryChart", {
+      type: "bar",
+      data: {
+        labels: x_values,
+        datasets: [{
+          label: 'Count',
+          data: y_values,
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'Number of Exoplanets Found by Method'
+          },
+          legend: {
+            display: false,
+          }
+        },
+        scales: {
+          y: {
+            type: 'logarithmic',
+          },
+        },
+      }
+    });
 }
 
 document.addEventListener("DOMContentLoaded", async () => mainEvent()); // the async keyword means we can make API requests
