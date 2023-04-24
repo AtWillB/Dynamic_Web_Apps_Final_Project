@@ -1,6 +1,14 @@
 async function get_vis_data(url){
   results = await fetch(url);
-  return results;
+  return results.json();
+}
+
+function get_column(list){
+  const new_column = [];
+  list.forEach((item) => {
+    new_column.push(item);
+  })
+  return new_column
 }
 
 
@@ -18,8 +26,17 @@ async function mainEvent() {
     // loadAnimation.style.display = "inline-block";
 
 
-    results  = await fetch("https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+DISTINCT discoverymethod, count(discoverymethod)+from+ps+groupby+discoverymethod&format=json");
+    const results  = await get_vis_data("https://exo-dash-planets.vercel.app/api/vis/discovery_methods_bar");
     console.log(results);
+
+    const x_values = get_column(results.X);
+    const y_values = get_column(results.Y);
+    console.log(y_values);
+    console.log(x_values);
+
+    
+    
+    
 }
 
 document.addEventListener("DOMContentLoaded", async () => mainEvent()); // the async keyword means we can make API requests
