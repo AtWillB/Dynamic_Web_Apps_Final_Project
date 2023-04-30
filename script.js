@@ -1,16 +1,22 @@
-async function create_chart(vis_promise) {
-  results = await vis_promise.json();
+async function fetch_json(url) {
+  results = await fetch(url);
+  results = await results.json();
+  return results;
+}
+
+async function create_chart(results) {
   console.log(results);
 
-  new Chart(results.Title, 
+  chart = new Chart(results.Title, 
       {type: "bar", data: {
             labels: results.X,
             datasets: [{ label: 'Count', data: results.Y,}]
       }, 
       options: { plugins: { 
-            title: { display: true, text: results.Title},
+            title: { display: true, text: "Number of Different Discovery Methods"},
             legend: {display: false,}},
             scales: { y: { type: 'logarithmic',},},} });
+  return chart;
 }
 
 
@@ -32,34 +38,37 @@ async function mainEvent() {
     // async has to be declared on every function that needs to "await" something
     console.log("loading data");
     // loadAnimation.style.display = "inline-block";
-    disc_vis = await fetch("https://exo-dash-planets.vercel.app/api/vis/discovery_methods_bar");
-    stell_vis = await fetch("https://exo-dash-planets.vercel.app/api/vis/stellar_type_bar");
-    create_chart(disc_vis)
+    disc_vis = await fetch_json("https://exo-dash-planets.vercel.app/api/vis/discovery_methods_bar");
+    stell_vis = await fetch_json("https://exo-dash-planets.vercel.app/api/vis/stellar_type_bar");
+    chart = await create_chart(disc_vis)
 
+    // console.log(chart.config.data.datasets[].data);
 
-    // create_chart(stell_vis)
     
 
+    // chart.config.data.datasets[0].data = stell_vis.Y
+    // chart.config.data.labels = stell_vis.X
+    // chart.update();
+
+    console.log(chart.config.options.plugins.title['text']);
 
 
-    // const results  = await get_vis_data("https://exo-dash-planets.vercel.app/api/vis/discovery_methods_bar");
-    // console.log(results);
-
+    // console.log(chart);
 
     dropdownButton.addEventListener("change", async (event) => {
-      results = await get_vis(dropdownButton.value);
-      // console.log(results.X);
-      // console.log(results.Y);
+      if (dropdownButton.value == "disc") {
+          chart.config.data.datasets[0].data = disc_vis.Y;
+          chart.config.data.labels = disc_vis.X;
+          chart.config.options.plugins.title['text'] = "Number of Different Discovery Methods";
 
-      new Chart("discoveryChart", 
-      {type: "bar", data: {
-            labels: results.X,
-            datasets: [{ label: 'Count', data: results.Y,}]
-      }, 
-      options: { plugins: { 
-            title: { display: true, text: 'Number of Exoplanets Found by Method'},
-            legend: {display: false,}},
-            scales: { y: { type: 'logarithmic',},},} });
+      }
+      else if (dropdownButton.value == "stell") {
+        chart.config.data.datasets[0].data = stell_vis.Y;
+        chart.config.data.labels = stell_vis.X;
+        chart.config.options.plugins.title['text'] = "Number of Different Stellar Types ";
+      }      
+      chart.update();
+
     
     })
 
