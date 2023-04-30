@@ -65,7 +65,7 @@ async function mainEvent() {
       else if (dropdownButton.value == "stell") {
         chart.config.data.datasets[0].data = stell_vis.Y;
         chart.config.data.labels = stell_vis.X;
-        chart.config.options.plugins.title['text'] = "Number of Different Stellar Types ";
+        chart.config.options.plugins.title['text'] = "Number of Different Star Types ";
       }      
       chart.update();
 
