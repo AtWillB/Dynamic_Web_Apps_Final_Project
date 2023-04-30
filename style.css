@@ -65,8 +65,6 @@
   .container {
     margin: 0 20px;
     display: flex;
-    justify-content: space-around;
-    align-items: start;
     flex:1;
   }
   
@@ -141,7 +139,8 @@
     padding: 1.5rem;
     align-items: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
   }
 
   
@@ -186,8 +185,9 @@
   }
 
   .chart {
-    margin: 0px auto;
     width: 60vw;
+    margin: 5rem;
+    padding: 5rem;
   }
   
   

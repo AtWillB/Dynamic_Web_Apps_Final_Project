@@ -1,21 +1,29 @@
-async function get_vis_data(url){
-  results = await fetch(url);
-  return results.json();
+async function create_chart(vis_promise) {
+  results = await vis_promise.json();
+  console.log(results);
+
+  new Chart(results.Title, 
+      {type: "bar", data: {
+            labels: results.X,
+            datasets: [{ label: 'Count', data: results.Y,}]
+      }, 
+      options: { plugins: { 
+            title: { display: true, text: results.Title},
+            legend: {display: false,}},
+            scales: { y: { type: 'logarithmic',},},} });
 }
 
-function get_column(list){
-  const new_column = [];
-  list.forEach((item) => {
-    new_column.push(item);
-  })
-  return new_column
-}
+
 
 
 
 async function mainEvent() {
   // the async keyword means we can make API requests
-  // const loadDataButton = document.querySelector("#data_load");
+  const dropdownButton = document.querySelector("#vis_selector");
+  const disc_chart = document.querySelector("#discovery_method");
+  const stellar_chart = document.querySelector("#stellar_type");
+
+  dropdownButton.style
 
   
 
@@ -24,44 +32,38 @@ async function mainEvent() {
     // async has to be declared on every function that needs to "await" something
     console.log("loading data");
     // loadAnimation.style.display = "inline-block";
+    disc_vis = await fetch("https://exo-dash-planets.vercel.app/api/vis/discovery_methods_bar");
+    stell_vis = await fetch("https://exo-dash-planets.vercel.app/api/vis/stellar_type_bar");
+    create_chart(disc_vis)
 
 
-    const results  = await get_vis_data("https://exo-dash-planets.vercel.app/api/vis/discovery_methods_bar");
-    console.log(results);
-
-    const x_values = get_column(results.X);
-    const y_values = get_column(results.Y);
-    console.log(y_values);
-    console.log(x_values);
+    // create_chart(stell_vis)
+    
 
 
 
-    new Chart("discoveryChart", {
-      type: "bar",
-      data: {
-        labels: x_values,
-        datasets: [{
-          label: 'Count',
-          data: y_values,
-        }]
-      },
-      options: {
-        plugins: {
-          title: {
-            display: true,
-            text: 'Number of Exoplanets Found by Method'
-          },
-          legend: {
-            display: false,
-          }
-        },
-        scales: {
-          y: {
-            type: 'logarithmic',
-          },
-        },
-      }
-    });
+    // const results  = await get_vis_data("https://exo-dash-planets.vercel.app/api/vis/discovery_methods_bar");
+    // console.log(results);
+
+
+    dropdownButton.addEventListener("change", async (event) => {
+      results = await get_vis(dropdownButton.value);
+      // console.log(results.X);
+      // console.log(results.Y);
+
+      new Chart("discoveryChart", 
+      {type: "bar", data: {
+            labels: results.X,
+            datasets: [{ label: 'Count', data: results.Y,}]
+      }, 
+      options: { plugins: { 
+            title: { display: true, text: 'Number of Exoplanets Found by Method'},
+            legend: {display: false,}},
+            scales: { y: { type: 'logarithmic',},},} });
+    
+    })
+
+    
 }
 
 document.addEventListener("DOMContentLoaded", async () => mainEvent()); // the async keyword means we can make API requests

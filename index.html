@@ -16,13 +16,22 @@
   <body>
     <div class="wrapper">
       <header class="header"><h1>NASA Exoplanet Archive Statistics</h1></header>
-      <div class="container"> 
-        <div class="chart">
-          <canvas id="discoveryChart"></canvas>
+      <div class="container top_section"> 
+        <div>
+          <label for="vis_selector">Choose a visualization:</label>
+          <select name="vis_selector" id="vis_selector">
+            <option value="disc">Discovery Types</option>
+            <option value="stell">Stellar Types</option>
+          </select>
         </div>
-        <!-- <div class="top_section box"> Data Visualization</div> -->
+        <div class="chart">
+          <canvas id="discovery_method"></canvas>
+        </div>
+        <div class="chart">
+          <canvas id="stellar_type"></canvas>
+        </div>
       </div>
-      <div class="container">
+      <div class="container bottom_section">
         <div class="bottom_section box"> Statisic 1 </div>
         <div class="bottom_section box"> Statisic 2 </div>
         <div class="bottom_section box"> Statisic 3 </div>
