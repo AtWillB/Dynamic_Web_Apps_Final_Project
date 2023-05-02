@@ -3,11 +3,16 @@ async function load_to_local() {
   disc_vis = await fetch_json("https://exo-dash-planets.vercel.app/api/vis/discovery_methods_bar");
   stell_vis = await fetch_json("https://exo-dash-planets.vercel.app/api/vis/stellar_type_bar");
   num_planets = await fetch_json("https://exo-dash-planets.vercel.app/api/stat/num_planets");
+  num_systems = await fetch_json("https://exo-dash-planets.vercel.app/api/stat/num_systems");
+  avg_mass_planet_e = await fetch_json("https://exo-dash-planets.vercel.app/api/stat/avg_mass_planet_e");
 
 
   localStorage.setItem('disc_vis', JSON.stringify(disc_vis));
   localStorage.setItem('stell_vis', JSON.stringify(stell_vis));
   localStorage.setItem('num_planets', JSON.stringify(num_planets));
+  localStorage.setItem('num_systems', JSON.stringify(num_systems));
+  localStorage.setItem('avg_mass_planet_e', JSON.stringify(avg_mass_planet_e));
+
 }
 
 // retrieve data from localstorage
@@ -28,6 +33,15 @@ function retrieve_from_local(item) {
     result = JSON.parse(result);
   }
 
+  else if (item == "num_systems" ) {
+    result = localStorage.getItem("num_systems");
+    result = JSON.parse(result);
+  }
+  else if (item == "avg_mass_planet_e") {
+    result = localStorage.getItem("avg_mass_planet_e");
+    result = JSON.parse(result);
+  }
+
   return result
 }
 
@@ -40,17 +54,22 @@ async function fetch_json(url) {
 
 //function to make the chart
 async function create_chart(results) {
-  console.log(results);
 
   chart = new Chart(results.Title, 
       {type: "bar", data: {
             labels: results.X,
             datasets: [{ label: 'Count', data: results.Y,}]
       }, 
-      options: { plugins: { 
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: { 
             title: { display: true, text: "Number of Different Discovery Methods"},
             legend: {display: false,}},
-            scales: { y: { type: 'logarithmic',},},} });
+            scales: { y: { type: 'logarithmic',},},
+      }
+
+  });
   return chart;
 }
 
@@ -61,6 +80,10 @@ async function create_chart(results) {
 async function mainEvent() {
   // the async keyword means we can make API requests
   const dropdownButton = document.querySelector("#vis_selector");
+  const stat1_text = document.querySelector("#stat1");
+  const stat2_text = document.querySelector("#stat2");
+  const stat3_text = document.querySelector("#stat3");
+
 
 
 
@@ -78,23 +101,34 @@ async function mainEvent() {
   // Drop down button changes the visualization
   dropdownButton.addEventListener("change", async (event) => {
     if (dropdownButton.value == "disc") {
-        chart.config.data.datasets[0].data = disc_vis.Y;
-        chart.config.data.labels = disc_vis.X;
+        data = {datasets: [{data: disc_vis.Y}], labels: disc_vis.X};
+        chart.config.data = data;
+        chart.config.type = "bar";
         chart.config.options.plugins.title['text'] = "Number of Different Discovery Methods";
+        chart.config.options.plugins.scales = { y: { type: 'logarithmic',}};
 
     }
     else if (dropdownButton.value == "stell") {
-      chart.config.data.datasets[0].data = stell_vis.Y;
-      chart.config.data.labels = stell_vis.X;
-      chart.config.options.plugins.title['text'] = "Number of Different Star Types ";
+      data = {datasets: [{data: stell_vis.Y}], labels: stell_vis.X};
+      chart.config.type = "pie";
+      chart.config.data = data
+      chart.config.options.plugins.title['text'] = "Host Star Spectral Types as Pie Chart";
+      console.log(chart);
     }      
     chart.update();
 
     
   })
 
-  // 
+  // Placing the statistics
+  const stat1 = retrieve_from_local('num_planets');
+  stat1_text.innerHTML = 'Total Number of Exo-Planets: '+stat1.num_planets.toString();
 
+  const stat2 = retrieve_from_local('num_systems');
+  stat2_text.innerHTML = 'Total Number of Star Systems: '+stat2.num_systems.toString();
+
+  const stat3 = retrieve_from_local('avg_mass_planet_e');
+  stat3_text.innerHTML = 'Average planetary mass(Earth masses): '+stat3.avg_mass_planet_e.toFixed(2).toString();
     
 }
 
