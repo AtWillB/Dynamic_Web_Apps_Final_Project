@@ -2,6 +2,7 @@
 async function load_to_local() {
   disc_vis = await fetch_json("https://exo-dash-planets.vercel.app/api/vis/discovery_methods_bar");
   stell_vis = await fetch_json("https://exo-dash-planets.vercel.app/api/vis/stellar_type_bar");
+  // year_vis  = await fetch_json("https://exo-dash-planets.vercel.app/api/vis/disc_year_line");
   num_planets = await fetch_json("https://exo-dash-planets.vercel.app/api/stat/num_planets");
   num_systems = await fetch_json("https://exo-dash-planets.vercel.app/api/stat/num_systems");
   avg_mass_planet_e = await fetch_json("https://exo-dash-planets.vercel.app/api/stat/avg_mass_planet_e");
@@ -9,6 +10,7 @@ async function load_to_local() {
 
   localStorage.setItem('disc_vis', JSON.stringify(disc_vis));
   localStorage.setItem('stell_vis', JSON.stringify(stell_vis));
+  // localStorage.setItem('year_vis', JSON.stringify(year_vis));
   localStorage.setItem('num_planets', JSON.stringify(num_planets));
   localStorage.setItem('num_systems', JSON.stringify(num_systems));
   localStorage.setItem('avg_mass_planet_e', JSON.stringify(avg_mass_planet_e));
@@ -25,6 +27,10 @@ function retrieve_from_local(item) {
   }
   else if (item == "stell_vis") {
     result = localStorage.getItem("stell_vis");
+    result = JSON.parse(result);
+  }
+  else if (item == "year_vis") {
+    result = localStorage.getItem("year_vis");
     result = JSON.parse(result);
   }
 
@@ -95,6 +101,7 @@ async function mainEvent() {
 
   const disc_vis = retrieve_from_local('disc_vis');
   const stell_vis = retrieve_from_local('stell_vis');
+  // const year_vis = retrieve_from_local('year_vis');
 
   chart = await create_chart(disc_vis)
 
@@ -104,7 +111,7 @@ async function mainEvent() {
         data = {datasets: [{data: disc_vis.Y}], labels: disc_vis.X};
         chart.config.data = data;
         chart.config.type = "bar";
-        chart.config.options.plugins.title['text'] = "Number of Different Discovery Methods";
+        chart.config.options.plugins.title['text'] = "Number of Different Exoplanet Discovery Methods";
         chart.config.options.plugins.scales = { y: { type: 'logarithmic',}};
 
     }
@@ -112,8 +119,16 @@ async function mainEvent() {
       data = {datasets: [{data: stell_vis.Y}], labels: stell_vis.X};
       chart.config.type = "pie";
       chart.config.data = data
-      chart.config.options.plugins.title['text'] = "Host Star Spectral Types as Pie Chart";
+      chart.config.options.plugins.title['text'] = "Host Stars Spectral Types of Exoplanets as Pie Chart";
+      chart.config.options.plugins.scales = {};
       console.log(chart);
+    }
+    else if (dropdownButton.value == "year") {
+      data = {datasets: [{data: year_vis.Y}], labels: year_vis.X};
+      chart.config.type = "line";
+      chart.config.data = data
+      chart.config.options.plugins.title['text'] = "Number of Exoplanet Discoveries per Year";
+      chart.config.options.plugins.scales = {};
     }      
     chart.update();
 
