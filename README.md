@@ -12,15 +12,15 @@ Below is a list of the endpoints I used for this project
 <ul>
     <li>Visualizations</li>
     <ul>
-        <li>[Discovery Method Frequency](https://exo-dash-planets.vercel.app/api/vis/discovery_methods_bar)</li>
-        <li>[Star Spectral Type by Percentage](https://exo-dash-planets.vercel.app/api/vis/stellar_type_pie)</li>
-        <li>[Discoveries made per Year](https://exo-dash-planets.vercel.app/api/vis/disc_year_line)</li>
+        <li>Discovery Method Frequency: https://exo-dash-planets.vercel.app/api/vis/discovery_methods_bar</li>
+        <li>Star Spectral Type by Percentage: https://exo-dash-planets.vercel.app/api/vis/stellar_type_pie</li>
+        <li>[Discoveries made per Year: https://exo-dash-planets.vercel.app/api/vis/disc_year_line</li>
     </ul>
     <li>Statistics</li>
     <ul>
-      <li>[Total number of Confirmed Exoplanets](https://exo-dash-planets.vercel.app/api/stat/num_planets)</li>
-      <li>[Total number of Star Systems that Exoplanets Orbit](https://exo-dash-planets.vercel.app/api/stat/num_systems)</li>
-      <li>[Average mass of a Exoplanet(in Earth Masses)](https://exo-dash-planets.vercel.app/api/stat/avg_mass_planet_e)</li>
+      <li>Total number of Confirmed Exoplanets: https://exo-dash-planets.vercel.app/api/stat/num_planets</li>
+      <li>Total number of Star Systems that Exoplanets Orbit: https://exo-dash-planets.vercel.app/api/stat/num_systems</li>
+      <li>Average mass of a Exoplanet(in Earth Masses): https://exo-dash-planets.vercel.app/api/stat/avg_mass_planet_e</li>
     </ul>
 </ul>
 
