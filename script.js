@@ -103,7 +103,9 @@ async function mainEvent() {
   const stell_vis = retrieve_from_local('stell_vis');
   const year_vis = retrieve_from_local('year_vis');
 
+  console.log(disc_vis);
   chart = await create_chart(disc_vis)
+
 
   // Drop down button changes the visualization
   dropdownButton.addEventListener("change", async (event) => {
