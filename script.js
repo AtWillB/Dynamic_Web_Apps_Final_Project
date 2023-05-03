@@ -1,8 +1,8 @@
 // Load data into local storage
 async function load_to_local() {
   disc_vis = await fetch_json("https://exo-dash-planets.vercel.app/api/vis/discovery_methods_bar");
-  stell_vis = await fetch_json("https://exo-dash-planets.vercel.app/api/vis/stellar_type_bar");
-  // year_vis  = await fetch_json("https://exo-dash-planets.vercel.app/api/vis/disc_year_line");
+  stell_vis = await fetch_json("https://exo-dash-planets.vercel.app/api/vis/stellar_type_pie");
+  year_vis  = await fetch_json("https://exo-dash-planets.vercel.app/api/vis/disc_year_line");
   num_planets = await fetch_json("https://exo-dash-planets.vercel.app/api/stat/num_planets");
   num_systems = await fetch_json("https://exo-dash-planets.vercel.app/api/stat/num_systems");
   avg_mass_planet_e = await fetch_json("https://exo-dash-planets.vercel.app/api/stat/avg_mass_planet_e");
@@ -10,7 +10,7 @@ async function load_to_local() {
 
   localStorage.setItem('disc_vis', JSON.stringify(disc_vis));
   localStorage.setItem('stell_vis', JSON.stringify(stell_vis));
-  // localStorage.setItem('year_vis', JSON.stringify(year_vis));
+  localStorage.setItem('year_vis', JSON.stringify(year_vis));
   localStorage.setItem('num_planets', JSON.stringify(num_planets));
   localStorage.setItem('num_systems', JSON.stringify(num_systems));
   localStorage.setItem('avg_mass_planet_e', JSON.stringify(avg_mass_planet_e));
@@ -101,7 +101,7 @@ async function mainEvent() {
 
   const disc_vis = retrieve_from_local('disc_vis');
   const stell_vis = retrieve_from_local('stell_vis');
-  // const year_vis = retrieve_from_local('year_vis');
+  const year_vis = retrieve_from_local('year_vis');
 
   chart = await create_chart(disc_vis)
 
