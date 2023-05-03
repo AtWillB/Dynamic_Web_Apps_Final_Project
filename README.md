@@ -6,9 +6,9 @@ This Project is titled NASA EXOPLANET ARCHIVE STATISTICS. Its goal is to display
 
 The second part of the website will display 3 numerical staticis, which as of the writing of this Readme have not been explicity identified. 
 
-The displayed data for this project do not go through any NASA API. Rather, they go through a website created by myself and Ethan Heugler, a computer science student at the University of Maryland. We collaborated on a project that I wrote the back-end for. In order to get data to Ethan, I created API endpoints using Python's Flask which generated appropriate JSON objects from a SQL database I set up. No specific browser was targeted. No css framework was used. 
-Below is a list of the endpoints I used for this project
+The displayed data for this project do not go through any NASA API. Rather, they go through a website created by myself and Ethan Heugler, a computer science student at the University of Maryland. We collaborated on a project that I wrote the back-end for. In order to get data to Ethan, I created API endpoints using Python's Flask which generated appropriate JSON objects from a SQL database I set up. No specific browser was targeted. No css framework was used. An image of the NASA Exoplanet Archive's logo is featured in the header of the web page. This header links to the website that I originally got this data from. 
 
+Below is a list of the endpoints I used for this project.
 <ul>
     <li>Visualizations</li>
     <ul>
