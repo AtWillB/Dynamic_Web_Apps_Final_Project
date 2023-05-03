@@ -30,7 +30,7 @@
     font-family: ‘Segoe UI’, Candara, ‘Bitstream Vera Sans’, ‘DejaVu Sans’, ‘Bitsream Vera Sans’, ‘Trebuchet MS’, Verdana, ‘Verdana Ref’, sans-serif;
     font-weight: 400;
     line-height: 1.5;
-    background-color: rgb(192, 188, 188);
+    background-color: rgb(246, 246, 246);
     color: rgb(0, 0, 0)
   }
   
@@ -91,15 +91,14 @@
     /* this will push other blocks out of the way */
   
     /* colors */
-    /* background-color: #ffe08a;
-    color: #4a4a4a; */
+    background-color: rgb(218, 218, 218);
   
     /* shapes */
     border-radius: 6px;
     font-size: 1.5rem;
     padding: 1.25rem;
     margin:0; /* removing the margin on h1 tags means the header pins to the top if we move */
-    border: 2px dashed;
+    border: 2px groove;
     border-radius: 4px;
   
   
@@ -110,14 +109,14 @@
   
   
   .box {
-    background-color: rgba(239, 239, 239, 0.40);
-    border: 2px dashed;
+    background-color:  rgb(218, 218, 218);
+    border: 2px outset;
     border-radius: 4px;
-  
     width: fit-content;
     height:fit-content;
     padding: 1.5rem;
     margin: 0 auto;
+    box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 2%);
   }
 
   .top_section {
@@ -156,8 +155,9 @@
     background-color: rgba(15, 20, 159, 0);
     font-size: 1.2rem;
     font-weight: 600;
-    border: 2px dashed;
+    border: 2px groove;
     border-radius: 4px;
+    background-color: rgb(218, 218, 218);
   }
   
   .footer a {
